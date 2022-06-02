@@ -16,9 +16,9 @@ phases:
       - echo Building and tagging Docker image
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t hamzaa .
-      - docker tag hamzaa:latest 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa:latest
+      - docker tag hamzaa: 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa
       
   post_build:
     commands:
       - echo Pushing to ECR
-      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa:latest
+      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa
