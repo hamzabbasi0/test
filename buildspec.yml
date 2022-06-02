@@ -15,10 +15,10 @@ phases:
       - echo Running tests
       - echo Building and tagging Docker image
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
-      - docker build -t webapp .
-      - docker tag webapp:latest 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:latest
+      - docker build -t hamzaa .
+      - docker tag hamzaa:latest 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa:latest
       
   post_build:
     commands:
       - echo Pushing to ECR
-      - docker docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:latest
+      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzaa:latest
