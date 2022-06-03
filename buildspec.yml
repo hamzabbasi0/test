@@ -1,5 +1,5 @@
 version: 0.2
-
+COMMIT = $(shell git rev-parse HEAD)
 phases:
   install:
     runtime-versions:
@@ -9,7 +9,6 @@ phases:
     commands:
       - echo Installing dependencies
       - npm install
-      - COMMIT = $(shell git rev-parse HEAD)
 
   build:
     commands:
