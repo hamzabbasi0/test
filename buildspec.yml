@@ -15,13 +15,13 @@ phases:
       - echo Building and tagging Docker image
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t webapp .
-      - docker tag webapp:${GIT_COMMIT} 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:${GIT_COMMIT}
+      - docker tag webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 
       
   post_build:
     commands:
       - echo Pushing to ECR
-      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:${GIT_COMMIT}
-      - printf '[{"name":"hamzaecs","imageUri":"979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:${GIT_COMMIT}"}]' > imagedefinitions.json
+      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 
+      - printf '[{"name":"hamzaecs","imageUri":"979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION "}]' > imagedefinitions.json
 
 artifacts:
   files:
