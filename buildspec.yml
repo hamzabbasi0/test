@@ -9,7 +9,6 @@ phases:
     commands:
       - echo Installing dependencies
       - npm install
-      - apt-get install git
 
   build:
     commands:
