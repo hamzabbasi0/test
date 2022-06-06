@@ -15,13 +15,13 @@ phases:
       - echo Building 
       - docker build -t webapp .
       - echo Tagging
-      - docker tag webapp:latest 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:latest
+      - docker tag webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
       
   post_build:
     commands:
       - echo Pushing to ECR
-      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:latest
-      - printf '[{"name":"hamzaecs","imageUri":"979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:latest"}]' > imagedefinitions.json
+      - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - printf '[{"name":"hamzaecs","imageUri":"979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION"}]' > imagedefinitions.json
 
 artifacts:
   files:
