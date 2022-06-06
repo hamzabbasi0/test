@@ -22,7 +22,6 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
       - docker tag webapp:$CommitId 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CommitId
       - docker push 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CommitId
-      - docker tag webapp:$CommitId 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CommitId
       
   post_build:
     commands:
