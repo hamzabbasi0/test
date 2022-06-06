@@ -1,4 +1,4 @@
-FROM node:12
+FROM public.ecr.aws/bitnami/node:latest
 WORKDIR /nodeapp
 COPY package*.json ./
 RUN npm install
