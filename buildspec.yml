@@ -1,10 +1,6 @@
 version: 0.2
-
+run-as: root
 phases:
-  install:
-    runtime-versions:
-      nodejs: 12
-
   pre_build:
     commands:
       - echo Installing dependencies
@@ -13,11 +9,12 @@ phases:
   build:
     commands:
       - echo Building and tagging Docker image
+      - echo Login
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
-      - docker pull 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzapp:latest
-      - docker tag 979490057625.dkr.ecr.us-east-1.amazonaws.com/hamzapp:latest webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 979490057625.dkr.ecr.us-east-1.amazonaws.com
-      - docker tag webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo Building 
+      - docker build -t webapp .
+      - echo Tagging
+      - docker tag webapp:latest 979490057625.dkr.ecr.us-east-1.amazonaws.com/webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
       
   post_build:
     commands:
